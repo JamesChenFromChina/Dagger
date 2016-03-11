@@ -1,1 +1,4 @@
-# Summary
+# Dagger Manual
+------------------
+## Install and usage
+
