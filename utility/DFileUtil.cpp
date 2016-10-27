@@ -10,8 +10,6 @@
 #include <linux/limits.h>
 #include <string.h>
 
-#include "DECode.h"
-
 #endif
 
 using namespace Dagger::Utils;
