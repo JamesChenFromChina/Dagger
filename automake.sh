@@ -8,6 +8,7 @@ buildDir="build"
 MakeBuildDir()
 {
     currentDir=${buildDir}"/"${1}
+    echo "Make build directory ${currentDir}"
 
     if [ ! -d ${currentDir} ]
     then
