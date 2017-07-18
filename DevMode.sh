@@ -3,25 +3,26 @@
 ln -s /usr/include ./SysLibInclude
 ln -s /usr/local/include ./SysLocLibInclude
 
+PROJECT_HOME=`pwd`
+
 if test ! -e thirdparty; then
     mkdir thirdparty
 fi
 
+cd thirdparty
+
+
 # Check that gmock is present.  Usually it is already there since the
 # directory is set up as an SVN external.
-if test ! -e thirdparty/gmock; then
+if test ! -e gtest; then
     echo "Google Mock not present.  Fetching gmock-1.7.0 from the web..."
-    curl $curlopts -L -O https://github.com/google/googlemock/archive/release-1.7.0.zip
-    unzip -q release-1.7.0.zip
-    rm release-1.7.0.zip
-    mv googlemock-release-1.7.0 thirdparty/gmock
-
-    curl $curlopts -L -O https://github.com/google/googletest/archive/release-1.7.0.zip
-    unzip -q release-1.7.0.zip
-    rm release-1.7.0.zip
-    mv googletest-release-1.7.0 thirdparty/gmock/gtest
+    curl $curlopts -L -O https://codeload.github.com/google/googletest/zip/release-1.8.0
+    unzip -q release-1.8.0
+    rm release-1.8.0
+    mv googletest-release-1.8.0 gtest
 fi
 
+cd ${PROJECT_HOME}
 
 cmake -DCMAKE_BUILD_TYPE=Debug .
 

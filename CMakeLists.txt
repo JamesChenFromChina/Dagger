@@ -26,11 +26,11 @@ foreach(srcFile ${SRC_LIST})
 endforeach(srcFile)
 
 # Add subproject
-add_subdirectory(thirdparty/gmock)
+add_subdirectory(thirdparty/gtest)
 
 # Compiling arguments
-include_directories(Dagger ${PROJECT_THIRD_PARTY_DIR}/gmock/gtest/include/)
-link_directories(${PROJECT_THIRD_PARTY_DIR}/gmock/gtest)
+include_directories(Dagger ${PROJECT_THIRD_PARTY_DIR}/gtest/googletest/include/)
+link_directories(${PROJECT_THIRD_PARTY_DIR}/gtest/googlemock/gtest)
 add_definitions("-Wno-unused-result -std=c++11 -Wsign-compare -g -fwrapv -Wall")
 #add_definitions("-Wall -Xlinker -export-dynamic -fstack-protector-all")
 

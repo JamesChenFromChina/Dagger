@@ -10,12 +10,13 @@ MakeBuildDir()
     currentDir=${buildDir}"/"${1}
     echo "Make build directory ${currentDir}"
 
-    if [ ! -d ${currentDir} ]
+    if [ ! -e ${currentDir} ]
     then
        mkdir -p ${currentDir}
     fi
 
     cd ${currentDir}
+    echo "cd ${currentDir}"
     cmake -DCMAKE_BUILD_TYPE=${1} ../../
     make
     cd ${ProjectRootDir}
