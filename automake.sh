@@ -20,10 +20,12 @@ if test ! -e gtest; then
     unzip -q release-1.8.0
     rm release-1.8.0
     mv googletest-release-1.8.0 gtest
+    cd gtest
+    cmake .
+    make
 fi
 
 cd ${PROJECT_HOME}
-
 
 ProjectRootDir=`pwd`
 buildDir="build"

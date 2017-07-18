@@ -1,6 +1,6 @@
 
 cmake_minimum_required(VERSION 2.8.12)
-project(Dagger)
+project(dagger)
 
 # Parameter Setting
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
@@ -26,7 +26,7 @@ foreach(srcFile ${SRC_LIST})
 endforeach(srcFile)
 
 # Add subproject
-add_subdirectory(thirdparty/gtest)
+# add_subdirectory(thirdparty/gtest)
 
 # Compiling arguments
 include_directories(Dagger ${PROJECT_THIRD_PARTY_DIR}/gtest/googletest/include/)
@@ -35,7 +35,7 @@ add_definitions("-Wno-unused-result -std=c++11 -Wsign-compare -g -fwrapv -Wall")
 #add_definitions("-Wall -Xlinker -export-dynamic -fstack-protector-all")
 
 # Make libdagger.so or libdagger.a
-#add_library(Dagger SHARED ${SRC_FILE})
+#add_library(dagger SHARED ${SRC_FILE})
 
 if (BUILD_SHARED_LIBS)
   set(Dagger_BUILD_SHARED_LIBS_DEFAULT ON)
@@ -51,7 +51,7 @@ else (Dagger_BUILD_SHARED_LIBS)
   set(Dagger_SHARED_OR_STATIC "STATIC")
 endif (Dagger_BUILD_SHARED_LIBS)
 
-add_library(Dagger ${Dagger_SHARED_OR_STATIC} ${SRC_FILE})
+add_library(dagger ${Dagger_SHARED_OR_STATIC} ${SRC_FILE})
 
 # Make testing program.
 add_executable(dagger_testing ${TESTING_FILE})
