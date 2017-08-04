@@ -1,8 +1,13 @@
 #!/bin/sh
 
-ln -s /usr/include ./SysLibInclude
-ln -s /usr/local/include ./SysLocLibInclude
+if test ! -e SysLibInclude; then
+    ln -s /usr/include ./SysLibInclude
+fi
 
+
+if test ! -e SysLocLibInclude; then
+    ln -s /usr/local/include ./SysLocLibInclude
+fi
 PROJECT_HOME=`pwd`
 
 if test ! -e thirdparty; then
@@ -38,8 +43,13 @@ then
 fi
 
 # ./automake.sh Debug
-# ./automake.sh Release
-cmake -DCMAKE_BUILD_TYPE={1} .
+#./ automake.sh Release
 
+if test ! -e build; then
+    mkdir build
+fi
+
+cd build
+cmake -DCMAKE_BUILD_TYPE={1} ..
+cd ..
 gtags
-
