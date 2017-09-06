@@ -45,6 +45,8 @@ fi
 # ./automake.sh Debug
 #./ automake.sh Release
 
+gtags
+
 if test ! -e build; then
     mkdir build
 fi
@@ -52,4 +54,3 @@ fi
 cd build
 cmake -DCMAKE_BUILD_TYPE={1} ..
 cd ..
-gtags

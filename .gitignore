@@ -42,6 +42,7 @@ SysLocLibInclude
 thirdparty
 bin
 build
+dagger_testing
 
 # for gtags
 GPATH
