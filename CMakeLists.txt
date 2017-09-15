@@ -29,31 +29,29 @@ endforeach(srcFile)
 # add_subdirectory(thirdparty/gtest)
 
 # Compiling arguments
-include_directories(Dagger ${PROJECT_THIRD_PARTY_DIR}/gtest/googletest/include/)
+include_directories(${PROJECT_NAME} ${PROJECT_THIRD_PARTY_DIR}/gtest/googletest/include/)
 link_directories(${PROJECT_THIRD_PARTY_DIR}/gtest/googlemock/gtest)
 add_definitions("-Wno-unused-result -std=c++11 -Wsign-compare -g -fwrapv -Wall")
 #add_definitions("-Wall -Xlinker -export-dynamic -fstack-protector-all")
 
-# Make libdagger.so or libdagger.a
-#add_library(dagger SHARED ${SRC_FILE})
-
 if (BUILD_SHARED_LIBS)
-  set(Dagger_BUILD_SHARED_LIBS_DEFAULT ON)
+  set(IS_BUILD_SHARED_LIBS_DEFAULT ON)
 else (BUILD_SHARED_LIBS)
-  set(Dagger_BUILD_SHARED_LIBS_DEFAULT OFF)
+  set(IS_BUILD_SHARED_LIBS_DEFAULT OFF)
 endif (BUILD_SHARED_LIBS)
 
-option(Dagger_BUILD_SHARED_LIBS "Build Shared Libraries" ${Dagger_BUILD_SHARED_LIBS_DEFAULT})
+option(PROJECT_BUILD_SHARED_LIBS "Build Shared Libraries" ${IS_BUILD_SHARED_LIBS_DEFAULT})
 
-if (Dagger_BUILD_SHARED_LIBS)
-  set(Dagger_SHARED_OR_STATIC "SHARED")
-else (Dagger_BUILD_SHARED_LIBS)
-  set(Dagger_SHARED_OR_STATIC "STATIC")
-endif (Dagger_BUILD_SHARED_LIBS)
+if (PROJECT_BUILD_SHARED_LIBS)
+  set(PROJECT_SHARED_OR_STATIC "SHARED")
+else (PROJECT_BUILD_SHARED_LIBS)
+  set(PROJECT_SHARED_OR_STATIC "STATIC")
+endif (PROJECT_BUILD_SHARED_LIBS)
 
-add_library(dagger ${Dagger_SHARED_OR_STATIC} ${SRC_FILE})
+add_library(${PROJECT_NAME} ${PROJECT_SHARED_OR_STATIC} ${SRC_FILE})
 
 # Make testing program.
-add_executable(dagger_testing ${TESTING_FILE})
+set(TESTING_PROGRAM_NAME ${PROJECT_NAME}_testing)
+add_executable(${TESTING_PROGRAM_NAME} ${TESTING_FILE})
 set(PUB_LIBRARIES libgtest.a pthread dl util m)
-target_link_libraries(dagger_testing ${PUB_LIBRARIES})
+target_link_libraries(${TESTING_PROGRAM_NAME} ${PUB_LIBRARIES})
