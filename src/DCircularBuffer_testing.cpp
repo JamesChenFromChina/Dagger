@@ -1,8 +1,6 @@
 
 #include <gtest/gtest.h>
-#include "DCircularBuffer.hpp"
-
-
+#include "Dagger.hpp"
 
 TEST(DaggerBase,CircularBuffer) {
     DCircularBuffer testbuf(0);
@@ -10,5 +8,4 @@ TEST(DaggerBase,CircularBuffer) {
 
     testbuf.Expand(100);
     ASSERT_EQ(testbuf.Capacity(),100UL);
-
 }

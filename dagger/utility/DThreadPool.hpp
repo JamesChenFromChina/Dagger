@@ -45,12 +45,7 @@ private:
 
 public:
     DThreadPool(DThreadPool &) = delete;
-    DThreadPool(DThreadPool &&pool)
-        : _taskList(std::move(pool._taskList))
-        ,_threadList(std::move(pool._threadList))
-        ,_threadCvMtx(std::move(pool._threadCvMtx))
-        ,_threadCv(std::move(pool._threadCv))
-        ,_isQuiting(pool._isQuiting) {}
+    DThreadPool(DThreadPool &&pool) = delete;
 
     DThreadPool(uint32_t threadCount) : _isQuiting(false) {
         for (uint32_t i = 0; i != threadCount; ++i) {
@@ -74,7 +69,7 @@ public:
         }
     }
 
-    vod Wait() {
+    void Wait() {
         this->join();
     }
 
