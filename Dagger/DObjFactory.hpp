@@ -39,7 +39,13 @@ namespace Dagger {
 
     };
 
-    template <typename ParentClass,typename ObjClass>
+    class ObjTemplete {
+    public:
+        ObjTemplete(ObjTemplete &obj) {
+        }
+    };
+
+    template <typename ParentClass,typename ObjClass,int rightObj = 0>
     class CloneObjFactoryImpl : public ObjFactoryBase<ParentClass>
     {
         ::std::shared_ptr<ObjClass> _templateObj;
@@ -55,7 +61,6 @@ namespace Dagger {
 
     private:
         DAGGER_DISALLOW_COPY_AND_ASSIGN_(CloneObjFactoryImpl);
-
     };
 }
 

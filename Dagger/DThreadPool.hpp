@@ -44,11 +44,21 @@ private:
     }
 
 public:
+    DThreadPool(DThreadPool &) = delete;
+    DThreadPool(DThreadPool &&pool)
+        : _taskList(std::move(pool._taskList))
+        ,_threadList(std::move(pool._threadList))
+        ,_threadCvMtx(std::move(pool._threadCvMtx))
+        ,_threadCv(std::move(pool._threadCv))
+        ,_isQuiting(pool._isQuiting) {}
+
     DThreadPool(uint32_t threadCount) : _isQuiting(false) {
         for (uint32_t i = 0; i != threadCount; ++i) {
             _threadList.push_back(std::thread(&DThreadPool::run,::std::ref(*this)));
         }
     }
+
+    virtual ~DThreadPool() { this->Close(); }
 
     void RunTask(std::shared_ptr<DThreadPoolTask> task) {
         std::unique_lock<std::mutex> lck(_threadCvMtx);
@@ -62,8 +72,12 @@ public:
             _isQuiting = true;
             _threadCv.notify_all();
         }
+    }
+
+    vod Wait() {
         this->join();
     }
+
 };
 
 #endif /* __DTHREADPOOL_H__ */
