@@ -5,7 +5,6 @@ project(dagger)
 # Parameter Setting
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR})
-
 set(PROJECT_THIRD_PARTY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty)
 
 # Get all source file
@@ -28,9 +27,19 @@ endforeach(srcFile)
 # Add subproject
 # add_subdirectory(thirdparty/gtest)
 
+set(INCLUDE_DIRS ${PROJECT_NAME})
+set(LINK_DIRS )
+
+# Add gtest
+if (BUILD_WITH_GTEST)
+  set(INCLUDE_DIRS ${INCLUDE_DIRS}  ${PROJECT_THIRD_PARTY_DIR}/gtest/googletest/include/)
+  set(LINK_DIRS ${LINK_DIRS} ${PROJECT_THIRD_PARTY_DIR}/gtest/googlemock/gtest)
+endif (BUILD_WITH_GTEST)
+
+include_directories(${INCLUDE_DIRS})
+link_directories(${LINK_DIRS})
+
 # Compiling arguments
-include_directories(${PROJECT_NAME} ${PROJECT_THIRD_PARTY_DIR}/gtest/googletest/include/)
-link_directories(${PROJECT_THIRD_PARTY_DIR}/gtest/googlemock/gtest)
 add_definitions("-Wno-unused-result -std=c++11 -Wsign-compare -g -fwrapv -Wall")
 #add_definitions("-Wall -Xlinker -export-dynamic -fstack-protector-all")
 
@@ -50,8 +59,10 @@ endif (PROJECT_BUILD_SHARED_LIBS)
 
 add_library(${PROJECT_NAME} ${PROJECT_SHARED_OR_STATIC} ${SRC_FILE})
 
-# Make testing program.
-set(TESTING_PROGRAM_NAME ${PROJECT_NAME}_testing)
-add_executable(${TESTING_PROGRAM_NAME} ${TESTING_FILE})
-set(PUB_LIBRARIES libgtest.a pthread dl util m)
-target_link_libraries(${TESTING_PROGRAM_NAME} ${PUB_LIBRARIES})
+if (BUILD_WITH_GTEST)
+  # Make testing program.
+  set(TESTING_PROGRAM_NAME testing)
+  add_executable(${TESTING_PROGRAM_NAME} ${TESTING_FILE})
+  set(PUB_LIBRARIES libgtest.a pthread dl util m)
+  target_link_libraries(${TESTING_PROGRAM_NAME} ${PUB_LIBRARIES})
+endif (BUILD_WITH_GTEST)
