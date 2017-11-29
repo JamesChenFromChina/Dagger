@@ -27,7 +27,7 @@ endforeach(srcFile)
 # Add subproject
 # add_subdirectory(thirdparty/gtest)
 
-set(INCLUDE_DIRS ${PROJECT_NAME})
+set(INCLUDE_DIRS .)
 set(LINK_DIRS )
 
 # Add gtest

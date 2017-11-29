@@ -2,7 +2,7 @@
 #ifndef DMSG_H
 #define DMSG_H
 
-#include <utility/DUtility.hpp>
+#include <dagger/Dagger.hpp>
 #include "DMsgHandler.hpp"
 
 class DMsg {

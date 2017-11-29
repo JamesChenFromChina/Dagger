@@ -5,3 +5,4 @@
 #include "DVisitor.hpp"
 #include "DMsgHandler.hpp"
 #include "DDispatcher.hpp"
+#include "DNetService.hpp"

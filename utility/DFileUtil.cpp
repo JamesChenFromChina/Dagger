@@ -1,5 +1,5 @@
 
-#include "Dagger.hpp"
+#include <dagger/Dagger.hpp>
 
 #ifdef WIN32
 #include <windows.h>
