@@ -6,15 +6,8 @@
 
 class DService {
 public:
+    DService(const DNetAddr &addr, DProtocolBase *protocol);
     virtual void Run() = 0;
-};
-
-class DHttpService : public DService {
-    uint16_t _port;
-public:
-    DHttpService(uint16_t port) : _port(port) {
-    }
-    virtual vod Run();
 };
 
 
