@@ -44,7 +44,10 @@ bin
 build
 dagger_testing
 
-# for gtags
+# For gtags
 GPATH
 GTAGS
 GRTAGS
+
+# Other temporary files
+docs/doxygen
