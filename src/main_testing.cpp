@@ -9,14 +9,15 @@ class TestMsg2 : public DMsg {
 };
 
 class DaggerMsgHandler
-    : public DMsgHandler<TestMsg1>
+    : public DMsgHandlerBase
+    , public DMsgHandler<TestMsg1>
     , public DMsgHandler<TestMsg2> {
 public:
-    void ProcessMsg(TestMsg1 *msg) {
+    virtual void ProcessMsg(DCommunicator *com,TestMsg1 *msg) {
 
     }
 
-    void ProcessMsg(TestMsg2 *msg) {
+    virtual void ProcessMsg(DCommunicator *com,TestMsg2 *msg) {
 
     }
 };

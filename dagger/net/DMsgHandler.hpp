@@ -2,13 +2,24 @@
 #ifndef DMSGHANDLER_H
 #define DMSGHANDLER_H
 
-#include "DMsg.hpp"
+#include "DCommunicator.hpp"
 #include "DVisitor.hpp"
+
+class DMsg;
+
+class DMsgHandlerBase {
+public:
+    virtual void ProcessMsgBase(DCommunicator *com, DMsg *msg) = 0;
+};
 
 template<typename MsgType>
 class DMsgHandler {
 public:
-    virtual void ProcessMsg(MsgType *msg) = 0;
+    virtual void ProcessMsgBase(DCommunicator *com, DMsg *msg) {
+        ProcessMsg(com, (MsgType *)msg);
+    }
+
+    virtual void ProcessMsg(DCommunicator *com, MsgType *msg) = 0;
 };
 
 
