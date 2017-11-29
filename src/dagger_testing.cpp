@@ -26,6 +26,8 @@ DMsgRegister<string, TestMsg1, TestMsgHandler> regist1("/default", proto);
 DMsgRegister<string, TestMsg2, TestMsgHandler> regist2("index", proto);
 
 TEST(FrameTesting, MsgRoute) {
+    DService testService(DNetAddr(127.0.0.1,8800), &proto);
+    testService.Run();
 
 }
 
