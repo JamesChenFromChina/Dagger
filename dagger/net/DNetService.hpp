@@ -1,4 +1,3 @@
-
 #ifndef DNETSERVICE_H
 #define DNETSERVICE_H
 
@@ -10,8 +9,11 @@ namespace Dagger
 class DNetService
 {
    public:
-    DNetService(const DNetAddr &addr, DProtocolBase *protocol);
-    void Run();
+    DNetService(const DNetAddr &addr, DProtocolBase *protocol) {
+    }
+    void Run() {
+    }
 };
 }
+
 #endif /* DNETSERVICE_H */

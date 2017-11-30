@@ -5,6 +5,8 @@
 #include <dagger/Dagger.hpp>
 #include "DMsgHandler.hpp"
 
+namespace Dagger {
+
 class DMsg {
 public:
     virtual void Encode(DStream *out) = 0;
@@ -14,5 +16,6 @@ public:
     }
 };
 
+}
 
 #endif /* DMSG_H */

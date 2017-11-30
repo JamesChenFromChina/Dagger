@@ -1,11 +1,26 @@
 
 #include <gtest/gtest.h>
-#include "Dagger.hpp"
+#include "dagger/Dagger.hpp"
+
+using namespace Dagger;
+using namespace std;
 
 class TestMsg1 : public DMsg {
+public:
+    virtual void Encode(DStream *out) {
+    }
+
+    virtual void Decode(DStream *in) {
+    }
 };
 
 class TestMsg2 : public DMsg {
+public:
+    virtual void Encode(DStream *out) {
+    }
+
+    virtual void Decode(DStream *in) {
+    }
 };
 
 class TestMsgHandler
@@ -22,11 +37,11 @@ public:
 };
 
 DHttpProtocol proto;
-DMsgRegister<string, TestMsg1, TestMsgHandler> regist1("/default", proto);
-DMsgRegister<string, TestMsg2, TestMsgHandler> regist2("index", proto);
+DMsgRegister<string, TestMsg1, TestMsgHandler> regist1("/default", &proto);
+DMsgRegister<string, TestMsg2, TestMsgHandler> regist2("index", &proto);
 
 TEST(FrameTesting, MsgRoute) {
-    DService testService(DNetAddr(127.0.0.1,8800), &proto);
+    DNetService testService(DNetAddr("127.0.0.1", 8800), &proto);
     testService.Run();
 
 }

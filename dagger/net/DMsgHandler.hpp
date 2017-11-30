@@ -5,6 +5,8 @@
 #include "DCommunicator.hpp"
 #include "DVisitor.hpp"
 
+namespace Dagger {
+
 class DMsg;
 
 class DMsgHandlerBase {
@@ -22,5 +24,6 @@ public:
     virtual void ProcessMsg(DCommunicator *com, MsgType *msg) = 0;
 };
 
+}
 
 #endif /* DMSGHANDLER_H */

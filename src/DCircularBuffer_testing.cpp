@@ -1,6 +1,6 @@
 
 #include <gtest/gtest.h>
-#include "Dagger.hpp"
+#include <dagger/Dagger.hpp>
 
 TEST(DaggerBase,CircularBuffer) {
     DCircularBuffer testbuf(0);

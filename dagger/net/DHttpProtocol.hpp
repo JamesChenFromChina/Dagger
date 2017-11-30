@@ -3,16 +3,13 @@
 
 #include "DProtocol.hpp"
 
-class DHttpProtocol : public DProtocol<string>  {
-public:
-    virtual void Regist(string &key, DaggerMsgHandler &handler) {
-
-    }
-
-    DaggerMsgHandler *GetHandler(string &key) {
-        
-    }
+namespace Dagger
+{
+class DHttpProtocol : public DProtocol<std::string>
+{
+   public:
+    DMsgHandlerBase *GetHandler(std::string &key) { return NULL; }
 };
-
+}
 
 #endif /* DHTTPPROTOCOL_H */

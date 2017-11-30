@@ -4,39 +4,36 @@
 
 #include <memory>
 
-namespace Dagger {
+namespace Dagger
+{
+#define DAGGER_DISALLOW_ASSIGN_(type) void operator=(type const &)
 
-#define DAGGER_DISALLOW_ASSIGN_(type)           \
-    void operator=(type const &)
-
-#define DAGGER_DISALLOW_COPY_AND_ASSIGN_(type)  \
-    type(type const &);                         \
+#define DAGGER_DISALLOW_COPY_AND_ASSIGN_(type) \
+    type(type const &);                        \
     DAGGER_DISALLOW_ASSIGN_(type)
 
-    template<typename T>
-    class ObjFactoryBase {
-    public:
-        virtual ~ObjFactoryBase() { }
-        virtual T *CreateObj() = 0;
+template <typename T>
+class DObjFactoryBase
+{
+   public:
+    virtual ~DObjFactoryBase() {}
+    virtual T *CreateObj() = 0;
 
-    protected:
-        ObjFactoryBase() { }
+   protected:
+    DObjFactoryBase() {}
+   private:
+    DAGGER_DISALLOW_COPY_AND_ASSIGN_(DObjFactoryBase);
+};
 
-    private:
-        DAGGER_DISALLOW_COPY_AND_ASSIGN_(ObjFactoryBase);
-    };
-
-    template <typename ParentClass,typename ObjClass>
-    class ObjFactoryImpl : public ObjFactoryBase<ParentClass>
-    {
-    public:
-        ObjFactoryImpl() { }
-        virtual ParentClass *CreateObj() { return new ObjClass; }
-
-    private:
-        DAGGER_DISALLOW_COPY_AND_ASSIGN_(ObjFactoryImpl);
-    };
-
+template <typename ParentClass, typename ObjClass>
+class DObjFactoryImpl : public DObjFactoryBase<ParentClass>
+{
+   public:
+    DObjFactoryImpl() {}
+    virtual ParentClass *CreateObj() { return new ObjClass; }
+   private:
+    DAGGER_DISALLOW_COPY_AND_ASSIGN_(DObjFactoryImpl);
+};
 }
 
 #endif /* DOBJFACTORY_H */
