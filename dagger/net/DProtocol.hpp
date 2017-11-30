@@ -1,6 +1,8 @@
 #ifndef DPROTOCOL_H
 #define DPROTOCOL_H
 
+#include <unordered_map.h>
+
 #include <dagger/utility/DObjFactory.hpp>
 
 namespace Dagger
@@ -8,7 +10,7 @@ namespace Dagger
 class DProtocolBase
 {
    public:
-    virtual std::string &&GetProtocolName()
+    virtual ::std::string &&GetProtocolName()
     {
         return ::std::move(std::string(""));
     }
@@ -17,9 +19,13 @@ class DProtocolBase
 template <typename KeyType>
 class DProtocol : public DProtocolBase
 {
+private:
+    ::std::unordered_map<KeyType> _msgFactoryList;
+    ::std::unordered_map<KeyType> _handlerFactoryList;
+
    public:
     template <typename MsgType>
-    void Regist(KeyType key, DObjFactoryBase<MsgType> *factory)
+    void Regist(KeyType key, DObjFactoryBase<MsgType> *msgFactory,DObjFactoryBase<DMsgHandler> *handlerFactory)
     {
     }
 };
