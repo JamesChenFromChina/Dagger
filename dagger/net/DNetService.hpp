@@ -8,11 +8,12 @@ namespace Dagger
 {
 class DNetService
 {
+   private:
+    DNetAddr _addr;
+    DProtocolBase *_protocol;
    public:
-    DNetService(const DNetAddr &addr, DProtocolBase *protocol) {
-    }
-    void Run() {
-    }
+    DNetService(const DNetAddr &addr, DProtocolBase *protocol);
+    void Run();
 };
 }
 

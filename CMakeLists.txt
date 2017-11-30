@@ -8,11 +8,17 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR})
 set(PROJECT_THIRD_PARTY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty)
 
 # Get all source file
-aux_source_directory(src SRC_DIR)
-aux_source_directory(utility UTIL_DIR)
+set(SRC_DIR src net utility)
+
+set(SRC_LIST )
+
+foreach(srcDir ${SRC_DIR})
+  aux_source_directory(${srcDir} SRC_DIR_FILES)
+  message(STATUS "SCANING DIR : " ${srcDir} " GET FILES : " ${SRC_DIR_FILES})
+  set(SRC_LIST ${SRC_LIST} ${SRC_DIR_FILES})
+endforeach(srcDir)
 
 # Separate testing file from program source file.
-set(SRC_LIST ${SRC_DIR} ${UTIL_DIR})
 set(TEST_REGEX_ST "^.+_testing\\.(h|H|hcc|HCC|c|C|cc|CC|cpp|CPP)$")
 foreach(srcFile ${SRC_LIST})
   if("${srcFile}" MATCHES "${TEST_REGEX_ST}")

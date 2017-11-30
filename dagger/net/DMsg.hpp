@@ -2,18 +2,20 @@
 #ifndef DMSG_H
 #define DMSG_H
 
-#include <dagger/Dagger.hpp>
-#include "DMsgHandler.hpp"
+#include "dagger/utility/DUtility.hpp"
 
-namespace Dagger {
 
-class DMsg {
-public:
+namespace Dagger
+{
+
+class DConnect;
+class DMsgHandlerBase;
+class DMsg
+{
+   public:
     virtual void Encode(DStream *out) = 0;
     virtual void Decode(DStream *in) = 0;
-    virtual void Visit(DCommunicator *com, DMsgHandlerBase *handler) {
-        handler->ProcessMsgBase(com, this);
-    }
+    virtual void Visit(DConnect *com, DMsgHandlerBase *handler);
 };
 
 }

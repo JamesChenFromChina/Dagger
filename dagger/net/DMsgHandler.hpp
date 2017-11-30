@@ -2,26 +2,23 @@
 #ifndef DMSGHANDLER_H
 #define DMSGHANDLER_H
 
-#include "DCommunicator.hpp"
 #include "DVisitor.hpp"
 
 namespace Dagger {
 
-class DMsg;
-
 class DMsgHandlerBase {
 public:
-    virtual void ProcessMsgBase(DCommunicator *com, DMsg *msg) = 0;
+    virtual void ProcessMsgBase(DConnect *con, DMsg *msg) = 0;
 };
 
 template<typename MsgType>
 class DMsgHandler {
 public:
-    virtual void ProcessMsgBase(DCommunicator *com, DMsg *msg) {
+    virtual void ProcessMsgBase(DConnect *com, DMsg *msg) {
         ProcessMsg(com, (MsgType *)msg);
     }
 
-    virtual void ProcessMsg(DCommunicator *com, MsgType *msg) = 0;
+    virtual void ProcessMsg(DConnect *com, MsgType *msg) = 0;
 };
 
 }

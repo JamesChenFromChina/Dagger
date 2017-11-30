@@ -6,8 +6,8 @@ namespace Dagger {
 class DCommunicator {
 public:
     DCommunicator() = delete;
-    DCommunicator *GetInstance();
-    void RegistSocket(DSocket *socket);
+    static DCommunicator *GetInstance();
+    DNetConnection *BuildConnection(const DNetAddr &addr);
 };
 
 }
