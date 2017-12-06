@@ -1,8 +1,6 @@
 #ifndef DPROTOCOL_H
 #define DPROTOCOL_H
 
-#include <unordered_map.h>
-
 #include <dagger/utility/DObjFactory.hpp>
 
 namespace Dagger
